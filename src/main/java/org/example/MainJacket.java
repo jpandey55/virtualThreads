@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This program shows that we can start millions of Virtual Threads
@@ -15,10 +17,10 @@ import java.util.ArrayList;
  */
 public class MainJacket {
 	
-	private static final int NUM_THREADS = 1_00_0000; 
+	private static final int NUM_THREADS = 10;
 	
 	private static void handleUserRequest() {
-		// System.out.println("Starting thread " + Thread.currentThread());
+		 System.out.println("Starting thread " + Thread.currentThread());
 		
 		try {
 			Thread.sleep(2000);
@@ -27,34 +29,22 @@ public class MainJacket {
 			e.printStackTrace();
 		}
 
-		// System.out.println("Ending thread " + Thread.currentThread());
+		 System.out.println("Ending thread " + Thread.currentThread());
 
 	}
 	
 	public static void main(String[] args) throws Exception {
 		
 		System.out.println("Starting main " + Thread.currentThread());
-		
-		var threads = new ArrayList<Thread>();
-		for (int j= 0; j < NUM_THREADS; j++) {
-			threads.add(startThread());
+
+		try(ExecutorService srv = Executors.newVirtualThreadPerTaskExecutor()) {
+			for (int j= 0; j < NUM_THREADS; j++) {
+				srv.submit(() -> handleUserRequest());
+			}
 		}
-		
-		// join on the threads
-		for (Thread thread : threads) {
-			thread.join();
-		}
-		
+
 		System.out.println("Ending main");
 	}
 
-	private static Thread startThread() {
-		// new Thread(() -> handleUserRequest()).start();
-		
-		// Start a new Virtual thread. No name is associated with thread 
-		return Thread.startVirtualThread(() -> handleUserRequest());
-		
-
-	}
 
 }

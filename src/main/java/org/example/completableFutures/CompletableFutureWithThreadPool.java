@@ -1,4 +1,6 @@
-package org.example;
+package org.example.completableFutures;
+
+import org.example.futures.FuturesPlay;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;

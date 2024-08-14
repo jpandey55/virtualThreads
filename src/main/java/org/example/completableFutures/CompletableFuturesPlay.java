@@ -1,4 +1,7 @@
-package org.example;
+package org.example.completableFutures;
+
+import org.example.futures.FuturesPlay;
+import org.example.futures.TaskResult;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.threads;
 
 class SimpleRunnable implements Runnable {
 

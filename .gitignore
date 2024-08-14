@@ -1,0 +1,12 @@
+# Exclude IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Exclude compiled Java class files
+*.class
+
+# Exclude IntelliJ IDEA specific files
+*.ipr
+*.iws
+
+target
